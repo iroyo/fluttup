@@ -13,12 +13,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
         fontFamily: 'Montserrat',
       ),
-      home: MyHomePage(),
+      home: HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,10 +26,11 @@ class MyHomePage extends StatelessWidget {
         brightness: Brightness.light,
         backgroundColor: Colors.white,
         title: Center(
-            child: Image.asset(
-          'assets/brand.png',
-          width: 180,
-        )),
+          child: Image.asset(
+            'assets/brand.png',
+            width: 180,
+          ),
+        ),
       ),
       body: GridView.count(
         childAspectRatio: 0.7,
