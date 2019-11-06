@@ -39,7 +39,7 @@ class MemberItem extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
-                            Expanded(child: Container()),
+                            Expanded(child: Activities()),
                             MemberItemAction(),
                           ],
                         ),
@@ -54,6 +54,65 @@ class MemberItem extends StatelessWidget {
           Divider(height: 2, thickness: 2, color: Color(0xFFE8E8E8)),
           MemberItemFooter()
         ],
+      ),
+    );
+  }
+}
+
+class Activities extends StatelessWidget {
+  final _sizeBadge = 32.0;
+
+  final _activities = [Colors.blue, Colors.amber, Colors.green];
+
+  @override
+  Widget build(BuildContext context) {
+    var _count = 0;
+    return Stack(
+      alignment: Alignment.center,
+      children: _activities.map((value) {
+        final badge = Positioned(
+          left: _count * ((_sizeBadge / 2) + 8),
+          child: ActivityBadge(_sizeBadge, value),
+        );
+        _count++;
+        return badge;
+      }).toList(),
+    );
+  }
+}
+
+class ActivityBadge extends StatelessWidget {
+  const ActivityBadge(
+    this.size,
+    this.background, {
+    Key key,
+  }) : super(key: key);
+
+  final double size;
+  final Color background;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        color: background,
+        borderRadius: BorderRadius.circular(size / 2),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(2),
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.white, width: 1.5),
+            borderRadius: BorderRadius.circular(size / 2),
+          ),
+          child: Icon(
+            Icons.ac_unit,
+            size: 20,
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }
