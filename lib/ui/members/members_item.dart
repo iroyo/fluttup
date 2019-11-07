@@ -1,17 +1,18 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttup/colors.dart';
+import 'package:fluttup/ui/colors.dart';
+import 'package:fluttup/ui/fluttup_icons.dart';
 
-class MemberItem extends StatelessWidget {
-  final int index;
+class MembersItem extends StatelessWidget {
+  final int _index;
 
-  const MemberItem({Key key, this.index}) : super(key: key);
+  const MembersItem(this._index, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
       clipBehavior: Clip.antiAlias,
-      margin: calculatePadding(index),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -21,7 +22,12 @@ class MemberItem extends StatelessWidget {
                 FractionallySizedBox(
                   heightFactor: 0.875,
                   child: Container(
-                    decoration: BoxDecoration(color: Colors.blueGrey),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: NetworkImage("https://picsum.photos/250?image=${_index+10}"),
+                      ),
+                    ),
                   ),
                 ),
                 Column(
@@ -60,7 +66,7 @@ class MemberItem extends StatelessWidget {
 }
 
 class Activities extends StatelessWidget {
-  final _sizeBadge = 32.0;
+  final _sizeBadge = 30.0;
 
   final _activities = [Colors.blue, Colors.amber, Colors.green];
 
@@ -129,10 +135,7 @@ class MemberItemAction extends StatelessWidget {
         elevation: 4,
         fillColor: colorAccent,
         shape: CircleBorder(),
-        child: Icon(
-          Icons.favorite_border,
-          color: Colors.white,
-        ),
+        child: Icon(FluttupIcons.like, size: 30, color: Colors.white),
         onPressed: () {},
       ),
     );
@@ -180,7 +183,7 @@ class MemberItemFooter extends StatelessWidget {
       child: Row(
         children: [
           Icon(
-            Icons.pin_drop,
+            FluttupIcons.location,
             color: Color.fromRGBO(46, 182, 125, 1),
             size: 14,
           ),
@@ -195,13 +198,5 @@ class MemberItemFooter extends StatelessWidget {
         ],
       ),
     );
-  }
-}
-
-EdgeInsetsGeometry calculatePadding(int position) {
-  if (position % 2 == 0) {
-    return EdgeInsets.only(left: 12, top: 16, right: 6);
-  } else {
-    return EdgeInsets.only(left: 6, top: 16, right: 12);
   }
 }

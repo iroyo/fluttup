@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fluttup/member_item.dart';
+import 'package:fluttup/ui/fluttup_icons.dart';
+import 'package:fluttup/ui/members/members.dart';
 
 void main() => runApp(MyApp());
 
@@ -22,23 +23,44 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        brightness: Brightness.light,
-        backgroundColor: Colors.white,
-        title: Center(
-          child: Image.asset(
-            'assets/brand.png',
-            width: 180,
+      body: Members(),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(FluttupIcons.members),
+            title: Text('Members'),
           ),
-        ),
+          BottomNavigationBarItem(
+            icon: Icon(FluttupIcons.activities),
+            title: Text('Activity'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(FluttupIcons.events),
+            title: Text('Events'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(FluttupIcons.chats),
+            title: Text('Chat'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(FluttupIcons.profile),
+            title: Text('Profile'),
+          ),
+        ],
+        currentIndex: 0,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        backgroundColor: Colors.white,
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Color(0xFFe01e5a),
+        selectedLabelStyle: TextStyle(color: Color(0xFFe01e5a), fontSize: 12, fontWeight: FontWeight.w700),
+        unselectedItemColor: Color(0xFF4a5476),
+        unselectedLabelStyle: TextStyle(color: Color(0xFF4a5476), fontSize: 12, fontWeight: FontWeight.w700),
+        onTap: null,
       ),
-      body: GridView.count(
-        childAspectRatio: 0.7,
-        crossAxisCount: 2,
-        children: List.generate(10, (i) {
-          return MemberItem(index: i);
-        }),
-      ),
+
     );
   }
 }
+
+
