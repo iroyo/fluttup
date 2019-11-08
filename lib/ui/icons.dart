@@ -11,5 +11,6 @@ class FluttupIcons {
   static const IconData message = IconData(0xe905, fontFamily: "Fluttup");
   static const IconData like = IconData(0xe906, fontFamily: "Fluttup");
   static const IconData location = IconData(0xe907, fontFamily: "Fluttup");
+  static const IconData filters = IconData(0xe908, fontFamily: "Fluttup");
 
 }

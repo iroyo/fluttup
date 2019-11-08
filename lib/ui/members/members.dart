@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:fluttup/ui/icons.dart';
 
+import '../colors.dart';
 import 'members_item.dart';
 
 class Members extends StatelessWidget {
+  const Members({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     var n = MediaQuery.of(context).orientation == Orientation.portrait ? 2 : 3;
@@ -11,7 +15,27 @@ class Members extends StatelessWidget {
       appBar: AppBar(
         brightness: Brightness.light,
         backgroundColor: Colors.white,
-        title: Center(child: Image.asset('assets/brand.png', width: 180)),
+        centerTitle: true,
+        title: Center(
+          child: Text(
+            "Fluttup",
+            style: TextStyle(
+              color: colorPrimary,
+              fontSize: 28,
+              fontFamily: "Forte",
+            ),
+          ),
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(
+              FluttupIcons.filters,
+              color: colorAccent,
+            ),
+            onPressed: null,
+          )
+        ],
+        bottom: TopNavigationBar(),
       ),
       body: GridView.count(
           padding: EdgeInsets.all(12),
@@ -22,4 +46,16 @@ class Members extends StatelessWidget {
           children: List.generate(10, (i) => MembersItem(i))),
     );
   }
+}
+
+class TopNavigationBar extends StatelessWidget implements PreferredSizeWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(decoration: BoxDecoration(color: Colors.yellow),);
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(42.0);
+
 }

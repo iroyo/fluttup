@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:fluttup/ui/fluttup_icons.dart';
+import 'package:fluttup/ui/activity/activity.dart';
+import 'package:fluttup/ui/chats/chats.dart';
+import 'package:fluttup/ui/colors.dart';
+import 'package:fluttup/ui/events/events.dart';
+import 'package:fluttup/ui/icons.dart';
 import 'package:fluttup/ui/members/members.dart';
+import 'package:fluttup/ui/page_item.dart';
+import 'package:fluttup/ui/profile/profile.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,56 +17,61 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Fluttup',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primaryColor: colorPrimary,
+        accentColor: colorAccent,
         fontFamily: 'Montserrat',
       ),
-      home: HomePage(),
+      home: HomeScreen(),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  HomeScreen({Key key}) : super(key: key);
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 0;
+
+  static const List<PageItem> pages = [
+    PageItem("Members", FluttupIcons.members, Members()),
+    PageItem("Activity", FluttupIcons.activities, Activity()),
+    PageItem("Events", FluttupIcons.events, Events()),
+    PageItem("Chat", FluttupIcons.chats, Chats()),
+    PageItem("Profile", FluttupIcons.profile, Profile()),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Members(),
+      body: pages[_selectedIndex].page,
       bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(FluttupIcons.members),
-            title: Text('Members'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(FluttupIcons.activities),
-            title: Text('Activity'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(FluttupIcons.events),
-            title: Text('Events'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(FluttupIcons.chats),
-            title: Text('Chat'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(FluttupIcons.profile),
-            title: Text('Profile'),
-          ),
-        ],
-        currentIndex: 0,
+        items: pages
+            .map((p) => BottomNavigationBarItem(
+                  icon: Icon(p.icon),
+                  title: Text(p.text),
+                ))
+            .toList(),
+        currentIndex: _selectedIndex,
         showSelectedLabels: true,
         showUnselectedLabels: true,
         backgroundColor: Colors.white,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Color(0xFFe01e5a),
-        selectedLabelStyle: TextStyle(color: Color(0xFFe01e5a), fontSize: 12, fontWeight: FontWeight.w700),
+        selectedLabelStyle: TextStyle(color: Color(0xFFe01e5a), fontSize: 11),
         unselectedItemColor: Color(0xFF4a5476),
-        unselectedLabelStyle: TextStyle(color: Color(0xFF4a5476), fontSize: 12, fontWeight: FontWeight.w700),
-        onTap: null,
+        unselectedLabelStyle: TextStyle(color: Color(0xFF4a5476), fontSize: 11),
+        onTap: _onItemTapped,
       ),
-
     );
   }
 }
-
-

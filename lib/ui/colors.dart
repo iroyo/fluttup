@@ -1,4 +1,4 @@
+import 'package:flutter/cupertino.dart';
 
- import 'package:flutter/cupertino.dart';
-
-const colorAccent = Color.fromRGBO(224, 30, 90, 1);
+const colorAccent = Color(0xFFe01e5a);
+const colorPrimary = Color(0xFF4a154b);

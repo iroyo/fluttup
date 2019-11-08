@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttup/ui/colors.dart';
-import 'package:fluttup/ui/fluttup_icons.dart';
+import 'package:fluttup/ui/icons.dart';
 
 class MembersItem extends StatelessWidget {
   final int _index;

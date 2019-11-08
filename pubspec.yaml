@@ -37,6 +37,9 @@ flutter:
     - assets/
 
   fonts:
+    - family: Forte
+      fonts:
+          - asset: fonts/Forte.ttf
     - family: Montserrat
       fonts:
           - asset: fonts/Montserrat-Regular.ttf
