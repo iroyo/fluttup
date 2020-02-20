@@ -9,7 +9,9 @@ class Members extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var n = MediaQuery.of(context).orientation == Orientation.portrait ? 2 : 3;
+    var n = MediaQuery
+        .of(context)
+        .orientation == Orientation.portrait ? 2 : 3;
 
     return Scaffold(
       appBar: AppBar(
@@ -47,20 +49,45 @@ class Members extends StatelessWidget {
   }
 }
 
-class TopNavigationBar extends StatelessWidget implements PreferredSizeWidget {
+class TopNavigationBar extends StatefulWidget implements PreferredSizeWidget {
+  @override
+  _TopNavigationBarState createState() => _TopNavigationBarState();
+
+  @override
+  Size get preferredSize => Size.fromHeight(42.0);
+}
+
+enum TopNavigationType { all, common }
+
+class _TopNavigationBarState extends State<TopNavigationBar> {
+  var type = TopNavigationType.all;
+
+  _selectAll() {
+    setState(() {
+      type = TopNavigationType.all;
+    });
+  }
+
+  _selectCommon() {
+    setState(() {
+      type = TopNavigationType.common;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 42,
-      child:  Padding(
+      child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             RawMaterialButton(
-              onPressed: null,
+              onPressed: _selectAll(),
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 16),
+                padding:
+                const EdgeInsets.symmetric(vertical: 2, horizontal: 16),
                 child: Text(
                   "All",
                   style: TextStyle(
@@ -72,14 +99,15 @@ class TopNavigationBar extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
             RawMaterialButton(
-              onPressed: null,
+              onPressed: _selectCommon(),
               fillColor: colorAccent,
               shape: RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(18.0),
                 side: BorderSide(color: Colors.red),
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 16),
+                padding:
+                const EdgeInsets.symmetric(vertical: 2, horizontal: 16),
                 child: Text(
                   "In common",
                   style: TextStyle(
@@ -93,10 +121,6 @@ class TopNavigationBar extends StatelessWidget implements PreferredSizeWidget {
           ],
         ),
       ),
-
     );
   }
-
-  @override
-  Size get preferredSize => Size.fromHeight(42.0);
 }
